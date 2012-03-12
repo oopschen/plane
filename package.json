@@ -1,0 +1,12 @@
+{
+  "name": "plane",
+  "version": "0.1.0",
+  "description": "A pure asynchronous Framework based on nodejs module 'events' let you play the code",
+  "homepage": "https://github.com/felixge/node-mysql",
+  "keywords": ["asynchronous","events","event-driven","play"],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/felixge/node-mysql.git"
+  },
+  "main": "plane.js"
+}
