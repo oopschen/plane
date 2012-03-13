@@ -22,3 +22,13 @@ xtower.fire
 plane.fly(path,cb) 
 	path is the absolute file path which your events stay
 	cb is the callback which init process finishes which does not guarantee the event is reg at the xtower.
+
+exports.evt_hello  = function() {
+	console.log('hello world from plane');
+};
+the code above gets you a event called hello which will log a hello world
+
+exports.evt_hello_world  = function() {
+	console.log('hello world from plane');
+};
+the code above gets you a event called hello.world which will log a hello world
