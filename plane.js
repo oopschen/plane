@@ -18,7 +18,7 @@ var assemleFile = function() {
 	for(var i=0;i<arguments.length;i++) {
 		fullPath += arguments[i] + '/';
 	};
-	return fullPath.replace(/\/\//g,'/').replace(/\/$/g,'');
+	return fullPath.replace(/\/\/+/g,'/').replace(/\/$/g,'');
 };
 var isRegProp = function(prop){
 	if(!prop) {
