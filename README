@@ -2,4 +2,23 @@ plane is an asynchronous event driven framework.
 It just introduce a new way of writting code. 
 Let's thinking in an asynchronous way.
 
+A fantastic way of programming
+every things go asynchronously,no multipule callbacks,only events.Every thing is an event,get config is an event and etc.
+
+
 Get started
+see examples/helloworld.js
+
+How it works?
+xtower.js abstract events controller as an tower at an airport with fire,on,remove events.
+plane.js reads event producer file to reg every thing to tower waitting for firing.
+
+Documents
+xtower.on the same as EventEmitter.on
+xtower.remove the  same as EventEmitter.removeListener
+xtower.fire
+	emit the event when the event has a listener.the callback's last parameter is the xtower self.
+
+plane.fly(path,cb) 
+	path is the absolute file path which your events stay
+	cb is the callback which init process finishes which does not guarantee the event is reg at the xtower.
