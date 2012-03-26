@@ -1,6 +1,6 @@
 {
   "name": "plane",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A pure asynchronous Framework based on nodejs module 'events' let you play the code",
   "homepage": "https://github.com/LeiChen/plane",
   "keywords": ["asynchronous","events","event-driven","play"],

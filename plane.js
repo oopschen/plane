@@ -61,7 +61,6 @@ xtower.on(gEvts.detectDir,detectDir);
 
 var regEvt = function(name,cb,tower){
 	tower.on(name,cb);
-	tower.fire(gEvts.complete);
 };
 xtower.on(gEvts.regEvt,regEvt);
 
@@ -105,4 +104,5 @@ exports.fly = function(path,cb){
 		});
 	};
 	xtower.fire(gEvts.detectDir,assemleFile(path),initDetect);
+	xtower.fire(gEvts.complete);
 };
