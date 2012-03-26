@@ -32,6 +32,9 @@ var formatProp = function(prop) {
 	}
 	return prop.replace(/^evt_(.*)$/,'$1').replace(/_/,'.');
 };
+var isFSNameCorrect = function(name) {
+	return null != /\.js$/g.exec(name) 
+};
 /**
 * input dirname,relative to this file
 * output [files]
@@ -85,12 +88,16 @@ exports.fly = function(path,cb){
 			console.error("[%s] detect error",file);
 			return;
 		}
+
 		fs.stat(file,function(error,stats) {
 			if(error) {
 				return;
 			}
 			// if file fire loadEvt
 			if(stats.isFile()) {
+				if(!isFSNameCorrect(file)) {
+					return;
+				}
 				xtower.fire(gEvts.loadEvt,file);
 			} else if(stats.isDirectory()) {
 				xtower.fire(gEvts.detectDir,file,initDetect);
