@@ -60,6 +60,7 @@ var detectDir = function(path,callback,tower) {
 xtower.on(gEvts.detectDir,detectDir);
 
 var regEvt = function(name,cb,tower){
+	console.info('reg event "%s"',name);
 	tower.on(name,cb);
 };
 xtower.on(gEvts.regEvt,regEvt);
