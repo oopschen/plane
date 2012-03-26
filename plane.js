@@ -30,7 +30,7 @@ var formatProp = function(prop) {
 	if(!prop) {
 		return '';
 	}
-	return prop.replace(/^evt_(.*)$/,'$1').replace(/_/,'.');
+	return prop.replace(/^evt_(.*)$/,'$1').replace(/_/g,'.');
 };
 var isFSNameCorrect = function(name) {
 	return null != /\.js$/g.exec(name) 
