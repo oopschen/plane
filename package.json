@@ -3,7 +3,7 @@
   "version": "0.1.4",
   "description": "A pure asynchronous Framework based on nodejs module 'events' let you play the code",
   "homepage": "https://github.com/LeiChen/plane",
-  "keywords": ["asynchronous","events","event-driven","play"],
+  "keywords": ["node","nodejs","asynchronous","events","event-driven","plane","play"],
   "repository": {
     "type": "git",
     "url": "git@github.com:LeiChen/plane.git"
