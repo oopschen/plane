@@ -10,7 +10,8 @@ var gEvts = {
 	detectDir:'_detect_dir',
 	regEvt:'_reg_evt',
 	loadEvt:'_load_evt',
-	complete:'_complete_load'
+	complete:'_complete_load',
+	detectDirCB:'_detect_dir_cb'
 };
 
 var assemleFile = function() {
@@ -39,27 +40,24 @@ var isFSNameCorrect = function(name) {
 * input dirname,relative to this file
 * output [files]
 */
-var detectDir = function(path,callback,tower) {
+var detectDir = function(tower,path) {
 	fs.readdir(path,function(error,files){
 		if(error) {
 			console.error('directory not exits %s',path);
 			return;
 		}
 		if(!files || 0 == files.length) {
-			console.log('no files found at %s',path);
+			console.error('no files found at %s',path);
 			return;
 		}
 		for(var i=0;i<files.length;i++) {
-			if(!callback) {
-				continue;
-			}
-			callback(assemleFile(path,files[i]));
+			tower.fire(gEvts.detectDirCB,assemleFile(path,files[i]));
 		}
 	});
 };
 xtower.on(gEvts.detectDir,detectDir);
 
-var regEvt = function(name,cb,tower){
+var regEvt = function(tower,name,cb){
 	console.info('reg event "%s"',name);
 	tower.on(name,cb);
 };
@@ -68,7 +66,7 @@ xtower.on(gEvts.regEvt,regEvt);
 /**
 * parse every file and reg every method to tower
 */
-var loadEvt = function(file,tower){
+var loadEvt = function(tower,file){
 	console.log('load file success[%s]',file);
 	var obj = require(file);
 	for(var i in obj) {
@@ -83,7 +81,7 @@ xtower.on(gEvts.loadEvt,loadEvt);
 
 exports.fly = function(path,cb){
 	xtower.on(gEvts.complete,cb);
-	var initDetect = function(file) {
+	xtower.on(gEvts.detectDirCB,function(tower,file) {
 		if(!file) {
 			console.error("[%s] detect error",file);
 			return;
@@ -98,12 +96,12 @@ exports.fly = function(path,cb){
 				if(!isFSNameCorrect(file)) {
 					return;
 				}
-				xtower.fire(gEvts.loadEvt,file);
+				tower.fire(gEvts.loadEvt,file);
 			} else if(stats.isDirectory()) {
-				xtower.fire(gEvts.detectDir,file,initDetect);
+				tower.fire(gEvts.detectDir,file);
 			}
 		});
-	};
-	xtower.fire(gEvts.detectDir,assemleFile(path),initDetect);
+	});
+	xtower.fire(gEvts.detectDir,assemleFile(path));
 	xtower.fire(gEvts.complete);
 };
